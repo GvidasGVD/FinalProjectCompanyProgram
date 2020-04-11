@@ -1,0 +1,82 @@
+﻿@model FinalProjectCompanyProgram.Models.Door
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Door</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="d-flex flex-row col-md-12 justify-content-center flex-wrap">
+                <div class="form-group col-md-6">
+                    <label asp-for="Type" class="control-label"></label>
+                    <input asp-for="Type" class="form-control" />
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Model" class="control-label"></label>
+                    <input asp-for="Model" class="form-control" />
+                    <span asp-validation-for="Model" class="text-danger"></span>
+                </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="DoorLeaf" class="control-label"></label>
+                        <input asp-for="DoorLeaf" class="form-control" />
+                        <span asp-validation-for="DoorLeaf" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="DoorJamb" class="control-label"></label>
+                        <input asp-for="DoorJamb" class="form-control" />
+                        <span asp-validation-for="DoorJamb" class="text-danger"></span>
+                    </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Hinges" class="control-label"></label>
+                    <input asp-for="Hinges" class="form-control" />
+                    <span asp-validation-for="Hinges" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Finish" class="control-label"></label>
+                    <input asp-for="Finish" class="form-control" />
+                    <span asp-validation-for="Finish" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Height" class="control-label"></label>
+                    <input asp-for="Height" class="form-control" />
+                    <span asp-validation-for="Height" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Width" class="control-label"></label>
+                    <input asp-for="Width" class="form-control" />
+                    <span asp-validation-for="Width" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-12">
+                    <label asp-for="Additions" class="control-label"></label>
+                    <input asp-for="Additions" class="form-control" />
+                    <span asp-validation-for="Additions" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6 d-flex flex-row justify-content-center flex-wrap">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

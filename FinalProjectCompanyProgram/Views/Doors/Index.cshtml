@@ -1,0 +1,125 @@
+﻿@model IEnumerable<FinalProjectCompanyProgram.Models.Door>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Doors</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoorLeaf)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoorJamb)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hinges)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Finish)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Height)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Width)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Additions)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoorLeaf)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoorJamb)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hinges)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Finish)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Height)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Width)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Additions)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<hr /><br /><br />
+
+<div class="container row p-0 m-0">
+    <div class="col-6">
+        <h2 class="text-info">Door List</h2>
+    </div>
+    <div class="col-3 offset-3">
+        <a asp-action="Create" asp-controller="Doors" class="btn btn-info form-control text-white">
+            Add new Door
+        </a>
+    </div>
+    <div class="col-12 border p-3">
+        <table id="DT_load" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Model</th>
+                    <th>Door Leaf</th>
+                    <th>Door Jamb</th>
+                    <th>Hinges</th>
+                    <th>Finish</th>
+                    <th>Height</th>
+                    <th>Width</th>
+                    <th>Price</th>
+                    <th>Additions</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+</div>
+@section Scripts{ 
+<script src="~/js/doorList.js"></script>
+}
