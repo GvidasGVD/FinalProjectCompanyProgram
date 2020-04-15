@@ -29,6 +29,9 @@ namespace FinalProjectCompanyProgram
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
                 );
+            services.AddDbContext<LoginDBContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+                );
             // Updates saved changes straight to the opened page
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
@@ -57,7 +60,7 @@ namespace FinalProjectCompanyProgram
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }
