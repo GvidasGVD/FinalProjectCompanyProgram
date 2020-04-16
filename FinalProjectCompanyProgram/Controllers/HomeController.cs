@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using FinalProjectCompanyProgram.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using FinalProjectCompanyProgram.Models;
+using System.Diagnostics;
 
 namespace FinalProjectCompanyProgram.Controllers
 {
@@ -22,7 +19,6 @@ namespace FinalProjectCompanyProgram.Controllers
         {
             return View();
         }
-
         public IActionResult Privacy()
         {
             return View();
@@ -33,5 +29,6 @@ namespace FinalProjectCompanyProgram.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

@@ -1,20 +1,20 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FinalProjectCompanyProgram.Models
 {
 
-    public partial class User
+    public partial class User: IdentityUser
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        //[Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //public int Id { get; set; }
 
-        [DisplayName("User Name")]
-        [Required(ErrorMessage = "User Name is required")]
-        //[Required]
-        public string UserName { get; set; }
+        //[DisplayName("User Name")]
+        //[Required(ErrorMessage = "User Name is required")]
+        //public string UserName { get; set; }
 
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Password is required")]

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using FinalProjectCompanyProgram.Data;
 using FinalProjectCompanyProgram.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FinalProjectCompanyProgram.Controllers
 {
@@ -22,6 +22,7 @@ namespace FinalProjectCompanyProgram.Controllers
         }
 
         // GET: Doors
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Doors.ToListAsync());
