@@ -7,10 +7,6 @@ namespace FinalProjectCompanyProgram.Models
     {
         [Required(ErrorMessage = "UserName is required")]
         public string UserName { get; set; }
-        //public string LastName { get; set; }
-        //[Required(ErrorMessage = "Email is required")]
-        //[EmailAddress]
-        //public string Email { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]

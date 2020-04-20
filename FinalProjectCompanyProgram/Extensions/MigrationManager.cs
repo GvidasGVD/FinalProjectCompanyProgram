@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 
-namespace IdentityByExamples.Extensions
+namespace FinalProjectCompanyProgram.Extensions
 {
     public static class MigrationManager
     {

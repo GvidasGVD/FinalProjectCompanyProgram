@@ -33,7 +33,7 @@ function loadDataTable() {
                         </a>
                         &nbsp;
                         <a class='btn btn-danger text-white' style='cursor:pointer; width:70px;'
-                            onclick=Delete('/Doors/Delete?id='+${data})>
+                            onclick=Delete('/Doors/AjaxDelete?id=${data}')>
                             Delete
                         </a>
                         </div>`;
@@ -61,7 +61,8 @@ function Delete(url) {
                 success: function (data) {
                     if (data.success) {
                         toastr.success(data.message);
-                        dataTable.ajax.reload();
+                        //dataTable.ajax.reload();
+                        location.reload();
                     }
                     else {
                         toastr.error(data.message);

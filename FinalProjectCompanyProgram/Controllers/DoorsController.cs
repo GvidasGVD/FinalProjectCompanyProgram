@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FinalProjectCompanyProgram.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using FinalProjectCompanyProgram.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace FinalProjectCompanyProgram.Controllers
 {
@@ -14,8 +11,8 @@ namespace FinalProjectCompanyProgram.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        [BindProperty]
-        public Door Door { get; set; }
+        //[BindProperty]
+        //public Door Door { get; set; }
         public DoorsController(ApplicationDbContext context)
         {
             _context = context;
@@ -28,7 +25,7 @@ namespace FinalProjectCompanyProgram.Controllers
             return View(await _context.Doors.ToListAsync());
         }
 
-        // GET: Doors/Details/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,11 +44,12 @@ namespace FinalProjectCompanyProgram.Controllers
         }
 
         // GET: Doors/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
         }
-
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Type,Model,DoorLeaf,DoorJamb,Hinges,Finish,Height,Width,Price,Additions")] Door door)
@@ -66,6 +64,7 @@ namespace FinalProjectCompanyProgram.Controllers
         }
 
         // GET: Doors/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -84,7 +83,9 @@ namespace FinalProjectCompanyProgram.Controllers
         // POST: Doors/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
+        //The ValidateAntiForgeryToken attribute helps prevent cross-site request forgery attacks.
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Type,Model,DoorLeaf,DoorJamb,Hinges,Finish,Height,Width,Price,Additions")] Door door)
         {
@@ -121,6 +122,7 @@ namespace FinalProjectCompanyProgram.Controllers
             return _context.Doors.Any(e => e.Id == id);
         }
 
+        [Authorize(Roles = "Administrator")]
         #region API Calls
         [HttpGet]
         public async Task<IActionResult> GetAll()
@@ -131,9 +133,19 @@ namespace FinalProjectCompanyProgram.Controllers
         // POST: Doors/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        
+        [HttpDelete]
+        public async Task<IActionResult> AjaxDelete(int id)
+        {
+            var door = await _context.Doors.FindAsync(id);
+            _context.Doors.Remove(door);
+            await _context.SaveChangesAsync();
+            return Json(new { success = true, message = "Delete successful" });
+        }
+        #endregion
 
-        // GET: Doors/Delete/5
+
+
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -145,14 +157,14 @@ namespace FinalProjectCompanyProgram.Controllers
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (door == null)
             {
-                //return NotFound();
-                return Json(new { success = false, message = "Error while Deleting" });
+                return NotFound();
             }
 
             return View(door);
         }
 
-        // POST: Doors/Delete/5
+
+        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -160,9 +172,9 @@ namespace FinalProjectCompanyProgram.Controllers
             var door = await _context.Doors.FindAsync(id);
             _context.Doors.Remove(door);
             await _context.SaveChangesAsync();
-            //return RedirectToAction(nameof(Index));
-            return Json(new { success = true, message = "Delete successful" });
+            return RedirectToAction(nameof(Index));
+            //return Json(new { success = true, message = "Delete successful" });
         }
-        #endregion
+        
     }
 }

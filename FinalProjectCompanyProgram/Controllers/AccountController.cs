@@ -1,18 +1,16 @@
 ﻿using AutoMapper;
 using FinalProjectCompanyProgram.Models;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using System;
-using System.Collections.Generic;
 
 namespace FinalProjectCompanyProgram.Controllers
 {
     public class AccountController : Controller
     {
         private readonly IMapper _mapper;
+        //The UserManager class comes from the Microsoft.AspNetCore.Identity namespace and 
+        //it provides a set of helper methods to help manage a user in the application.
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
 
@@ -30,7 +28,7 @@ namespace FinalProjectCompanyProgram.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(UserRegistrationModel userModel)
+        public async Task<IActionResult> Register(UserRegistrationModel userModel, string returnUrl = null)
         {
             if (!ModelState.IsValid)
             {
@@ -46,13 +44,14 @@ namespace FinalProjectCompanyProgram.Controllers
                 {
                     ModelState.TryAddModelError(error.Code, error.Description);
                 }
-
+                
                 return View(userModel);
             }
 
             await _userManager.AddToRoleAsync(user, "Visitor");
-
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            var newUser = await _signInManager.PasswordSignInAsync(userModel.UserName, userModel.Password, false, false);
+            return RedirectToLocal(returnUrl);
+            //return RedirectToAction(nameof(DoorsController.Index), "Doors");
         }
 
         [HttpGet]
@@ -69,18 +68,40 @@ namespace FinalProjectCompanyProgram.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(userModel);
+                return View();
             }
 
             var result = await _signInManager.PasswordSignInAsync(userModel.UserName, userModel.Password, userModel.RememberMe, false);
-            if (result.Succeeded)
+            var user = await _userManager.FindByNameAsync(userModel.UserName);
+            if(user == null)
             {
-                return RedirectToLocal(returnUrl);
-            }
-            else
-            {
-                ModelState.AddModelError("", "Invalid UserName or Password");
+                // return View(userModel);
+                ModelState.AddModelError("", "Invalid User Name or Password");
                 return View();
+            } else
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                if (result.Succeeded)
+                {
+                    if (roles.Contains("Administrator"))
+                    {
+                        //return RedirectToAction("Index", "Administrator");
+                        return RedirectToLocal(returnUrl);
+                    }
+
+                    if (roles.Contains("Visitor"))
+                    {
+                        //return RedirectToAction("Index", "Visitor");
+                        return RedirectToLocal(returnUrl);
+                    }
+
+                    return RedirectToLocal(returnUrl);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid User Name or Password");
+                    return View();
+                }
             }
         }
         [HttpPost]

@@ -2,11 +2,10 @@
 
 <h1>Register</h1>
 
-<h4>UserRegistrationModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Register">
+        <form asp-action="Register" asp-route-returnUrl="@ViewData["ReturnUrl"]">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
