@@ -4,14 +4,16 @@ using FinalProjectCompanyProgram.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinalProjectCompanyProgram.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200420195110_UpdatedRoles")]
+    partial class UpdatedRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,8 +50,8 @@ namespace FinalProjectCompanyProgram.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -164,22 +166,22 @@ namespace FinalProjectCompanyProgram.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f49e7de6-b261-4405-960c-06ca97d6e848",
-                            ConcurrencyStamp = "a71a5bf5-fdbe-492b-aeaf-1e9dbe59f133",
+                            Id = "f749f74c-022b-4a1a-b4d0-7bca365d3c27",
+                            ConcurrencyStamp = "f2f30ee6-c005-4677-a5a7-ee89e8ad6f98",
                             Name = "Visitor",
                             NormalizedName = "VISITOR"
                         },
                         new
                         {
-                            Id = "d19a0938-cf60-49c1-a046-8cba9ca9cd9a",
-                            ConcurrencyStamp = "62268bf3-b39f-467f-8a28-496c3df03200",
+                            Id = "1d8db79f-ef51-4cd2-99a1-835abeefe7e9",
+                            ConcurrencyStamp = "96d136df-3476-407d-bdca-f32e781b3c63",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "458d49c6-19f9-4a91-9195-a435b77258c3",
-                            ConcurrencyStamp = "9943deb8-630f-46e6-b5d9-0593e0743cb4",
+                            Id = "3ae48b8f-0f67-4f47-849a-2b714f516f25",
+                            ConcurrencyStamp = "fa00d630-4b72-4f80-b7fc-ee0f2b09bdd1",
                             Name = "Owner",
                             NormalizedName = "OWNER"
                         });

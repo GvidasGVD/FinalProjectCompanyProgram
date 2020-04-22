@@ -7,8 +7,8 @@ namespace IdentityByExamples
     {
         public MappingProfile()
         {
-            CreateMap<UserRegistrationModel, User>()
-                .ForMember(u => u.UserName, opt => opt.MapFrom(x => x.UserName));
+            CreateMap<UserRegistrationModel, User>();
+                //.ForMember(u => u.UserName, opt => opt.MapFrom(x => x.UserName));
         }
     }
 }

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace IdentityByExamples.Models.Configuration
+namespace FinalProjectCompanyProgram.Models.Configuration
 {
     public class RoleConfiguration : IEntityTypeConfiguration<IdentityRole>
     {
@@ -18,6 +18,11 @@ namespace IdentityByExamples.Models.Configuration
             {
                 Name = "Administrator",
                 NormalizedName = "ADMINISTRATOR"
+            },
+            new IdentityRole
+            {
+                Name = "Owner",
+                NormalizedName = "OWNER"
             });
         }
     }

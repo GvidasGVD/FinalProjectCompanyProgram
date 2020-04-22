@@ -8,6 +8,7 @@ namespace FinalProjectCompanyProgram.Controllers
 {
     public class AccountController : Controller
     {
+        //IMapper helps to manage a user in application.
         private readonly IMapper _mapper;
         //The UserManager class comes from the Microsoft.AspNetCore.Identity namespace and 
         //it provides a set of helper methods to help manage a user in the application.

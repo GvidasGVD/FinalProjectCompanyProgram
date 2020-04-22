@@ -25,7 +25,7 @@ namespace FinalProjectCompanyProgram.Controllers
             return View(await _context.Doors.ToListAsync());
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator, Owner")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,12 +44,12 @@ namespace FinalProjectCompanyProgram.Controllers
         }
 
         // GET: Doors/Create
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator, Owner")]
         public IActionResult Create()
         {
             return View();
         }
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator, Owner")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Type,Model,DoorLeaf,DoorJamb,Hinges,Finish,Height,Width,Price,Additions")] Door door)
@@ -64,7 +64,7 @@ namespace FinalProjectCompanyProgram.Controllers
         }
 
         // GET: Doors/Edit/5
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator, Owner")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,7 +83,7 @@ namespace FinalProjectCompanyProgram.Controllers
         // POST: Doors/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator, Owner")]
         [HttpPost]
         //The ValidateAntiForgeryToken attribute helps prevent cross-site request forgery attacks.
         [ValidateAntiForgeryToken]
@@ -122,7 +122,7 @@ namespace FinalProjectCompanyProgram.Controllers
             return _context.Doors.Any(e => e.Id == id);
         }
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator, Owner")]
         #region API Calls
         [HttpGet]
         public async Task<IActionResult> GetAll()
@@ -145,7 +145,7 @@ namespace FinalProjectCompanyProgram.Controllers
 
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator, Owner")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -164,7 +164,7 @@ namespace FinalProjectCompanyProgram.Controllers
         }
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator, Owner")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -173,7 +173,6 @@ namespace FinalProjectCompanyProgram.Controllers
             _context.Doors.Remove(door);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-            //return Json(new { success = true, message = "Delete successful" });
         }
         
     }

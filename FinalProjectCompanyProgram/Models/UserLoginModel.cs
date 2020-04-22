@@ -9,6 +9,7 @@ namespace FinalProjectCompanyProgram.Models
 public class UserLoginModel
     {
         [Required]
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
 
         [Required]

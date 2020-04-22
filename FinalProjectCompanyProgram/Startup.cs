@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FinalProjectCompanyProgram.Models;
+using FinalProjectCompanyProgram.Models.DbContexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +36,10 @@ namespace FinalProjectCompanyProgram
                 );
 
 
+            //AddIdentity method adds the services that are necessary for user-management actions, such as creating users, 
+            //hashing passwords, password validation, etc. 
+            //If the project requires those features and any additional ones like supporting Roles not only Users, 
+            //supporting external authentication and SingInManager, use this method.
             services.AddIdentity<User, IdentityRole>(opt =>
             {
                 opt.Password.RequireDigit = false;
@@ -42,7 +47,8 @@ namespace FinalProjectCompanyProgram
             })
              .AddEntityFrameworkStores<ApplicationDbContext>();
 
-
+            //AutoMapper is a simple library that helps to transform one object type to another. 
+            //It is a convention - based object-to - object mapper that requires very little configuration. 
             services.AddAutoMapper(typeof(Startup));
 
             // Updates saved changes straight to the opened page
@@ -68,15 +74,18 @@ namespace FinalProjectCompanyProgram
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
+
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseSession();
 
+            //UseEndPoints does not work without app.UseRouting() since UseEndpoints is a middleware
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

@@ -11,22 +11,6 @@ namespace FinalProjectCompanyProgram.Models.Configuration
     {
         public void Configure(EntityTypeBuilder<Door> builder)
         {
-            //builder.HasData(
-            //    new Door
-            //    {
-            //        Id = new Guid("e310a6cb-6677-4aa6-93c7-2763956f7a97"),
-            //        Name = "Mark Miens",
-            //        Age = 26,
-            //        Position = "Software Developer"
-            //    },
-            //    new Employee
-            //    {
-            //        Id = new Guid("398d10fe-4b8d-4606-8e9c-bd2c78d4e001"),
-            //        Name = "Anna Simmons",
-            //        Age = 29,
-            //        Position = "Software Developer"
-            //    }
-            //);
         }
     }
 }

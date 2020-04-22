@@ -5,7 +5,7 @@
 }
 
 <h1>Doors</h1>
-@if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+@if (User.Identity.IsAuthenticated && (User.IsInRole("Administrator") || User.IsInRole("Owner")))
 {
     <p>
         <a asp-action="Create">Create New</a>
@@ -44,7 +44,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Additions)
             </th>
-            @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+            @if (User.Identity.IsAuthenticated && (User.IsInRole("Administrator") || User.IsInRole("Owner")))
             {
                 <th>Actions</th>
             }
@@ -84,7 +84,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Additions)
                 </td>
-                @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                @if (User.Identity.IsAuthenticated && (User.IsInRole("Administrator") || User.IsInRole("Owner")))
                 {
                     <td>
                         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
@@ -100,7 +100,7 @@
 <hr />
 <br />
 <br />
-@if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+@if (User.Identity.IsAuthenticated && (User.IsInRole("Administrator") || User.IsInRole("Owner")))
 {
     <div class="container row p-0 m-0">
         <div class="col-6">
